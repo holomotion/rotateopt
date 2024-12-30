@@ -1,3 +1,4 @@
+use std::ffi::OsString;
 use std::fs;
 use std::io::{self, Write};
 use std::process::Command;
@@ -8,7 +9,7 @@ struct RotationMatrix {
     matrix: String,
 }
 
-const rule_path: String = String::from("/etc/udev/rules.d/98-touchscreen-rotate.rules");
+const RULE_PATH:&str ="/etc/udev/rules.d/98-touchscreen-rotate.rules";
 
 fn main() -> io::Result<()> {
     let rotations = vec![
@@ -57,9 +58,9 @@ fn main() -> io::Result<()> {
         selected_rotation.matrix
     );
 
-    match fs::write(rule_path, rule_content) {
+    match fs::write(RULE_PATH, rule_content) {
         Ok(_) => {
-            println!("规则文件已成功写入到 {}", rule_path);
+            println!("规则文件已成功写入到 {}", RULE_PATH);
 
             // 重新加载 udev 规则
             match Command::new("sudo")
