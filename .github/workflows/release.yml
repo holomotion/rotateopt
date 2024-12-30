@@ -43,11 +43,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
           profile: minimal
-          # Since rust 1.72, some platforms are tier 3
-          toolchain: 1.75
           default: true
 
       - name: Install OpenSSL
