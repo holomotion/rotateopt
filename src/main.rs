@@ -1,4 +1,3 @@
-use std::ffi::OsString;
 use std::fs;
 use std::io::{self, Write};
 use std::process::Command;
