@@ -53,7 +53,7 @@ fn main() -> io::Result<()> {
 
     // 创建 udev 规则
     let rule_content = format!(
-        r#"ACTION=="add|change", KERNEL=="event[0-9]*", ENV{{ID_INPUT_TOUCHSCREEN}}=="1", ENV{{LIBINPUT_CALIBRATION_MATRIX}}="{}"#,
+        r#"ACTION=="add|change", KERNEL=="event[0-9]*", ENV{{ID_INPUT_TOUCHSCREEN}}=="1", ENV{{LIBINPUT_CALIBRATION_MATRIX}}="{}""#,
         selected_rotation.matrix
     );
 
