@@ -77,3 +77,26 @@ fn main() -> io::Result<()> {
 
     Ok(())
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_rule_content_format() {
+        let test_matrix = RotationMatrix {
+            name: String::from("测试方向"),
+            matrix: String::from("1 0 0 0 1 0 0 0 1"),
+        };
+
+        let rule_content = format!(
+            r#"ACTION=="add|change", KERNEL=="event[0-9]*", ENV{{ID_INPUT_TOUCHSCREEN}}=="1", ENV{{LIBINPUT_CALIBRATION_MATRIX}}="{}""#,
+            test_matrix.matrix
+        );
+
+        let expected = r#"ACTION=="add|change", KERNEL=="event[0-9]*", ENV{ID_INPUT_TOUCHSCREEN}=="1", ENV{LIBINPUT_CALIBRATION_MATRIX}="1 0 0 0 1 0 0 0 1""#;
+
+        assert_eq!(rule_content, expected);
+    }
+}
